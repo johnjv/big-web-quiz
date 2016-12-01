@@ -326,6 +326,7 @@ class App extends BoundComponent {
                       id={question._id}
                       title={question.title}
                       text={question.text}
+                      picture={question.picture}
                       scored={question.scored}
                       priority={question.priority}
                       answers={question.answers}
@@ -347,6 +348,10 @@ class App extends BoundComponent {
                     <tr>
                       <td>Text:</td>
                       <td>{question.text}</td>
+                    </tr>
+                    <tr>
+                      <td>Picture:</td>
+                      <td><img src={question.picture}/></td>
                     </tr>
                     <tr>
                       <td>Scored:</td>

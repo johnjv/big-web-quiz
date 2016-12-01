@@ -32,11 +32,12 @@ export default class QuestionUpdate extends BoundComponent {
       title = '',
       text = '',
       answers = [createAnswerObject(), createAnswerObject()],
+      picture = '',
       scored = true,
       priority = false
     } = props;
 
-    this.state = {title, text, answers, scored, priority};
+    this.state = {title, text, answers, picture, scored, priority};
   }
   async onRemoveQuestion(event) {
     event.preventDefault();
@@ -64,7 +65,7 @@ export default class QuestionUpdate extends BoundComponent {
   }
   async onSubmit(event) {
     event.preventDefault();
-    const {title, text, answers, scored, priority} = this.state;
+    const {title, text, answers, picture, scored, priority} = this.state;
     const id = this.props.id;
 
     try {
@@ -74,7 +75,7 @@ export default class QuestionUpdate extends BoundComponent {
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
           title, text,
-          answers, scored, id, priority
+          answers, picture, scored, id, priority
         })
       });
 
@@ -112,6 +113,10 @@ export default class QuestionUpdate extends BoundComponent {
 
         <tr>
           <th>Question:</th><td><input type="text" value={this.state.text} onChange={this.linkState('text')}/></td>
+        </tr>
+
+        <tr>
+          <th>PictureURL:</th><td><input type="text" value={this.state.picture} onChange={this.linkState('picture')}/></td>
         </tr>
 
         <tr>

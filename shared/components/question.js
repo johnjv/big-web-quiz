@@ -95,7 +95,7 @@ export default class Question extends BoundComponent {
       ).map(el => el.checked)
     })
   }
-  render({id, title, text, answers, closed, showLiveResults, correctAnswers, presentation}, {answersChecked, answersSubmitted, spinnerState, submittedAnswersThisSession}) {
+  render({id, title, text, picture, answers, closed, showLiveResults, correctAnswers, presentation}, {answersChecked, answersSubmitted, spinnerState, submittedAnswersThisSession}) {
 
     const answersToCheck = closed ? answersSubmitted : answersChecked;
 
@@ -126,6 +126,7 @@ export default class Question extends BoundComponent {
           <div class="question__container">
             <h1 class="question__title">{title}</h1>
             <p class="question__text">{text}</p>
+            <img src={picture} />
             <div class="question__answer-container">
               {answers.map((answer, i) =>
                 <div class={

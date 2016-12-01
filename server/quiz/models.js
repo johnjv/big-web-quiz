@@ -21,6 +21,8 @@ const questionSchema = mongoose.Schema({
   title: {type: String, required: true, default: "How much is it?!"},
   // The actual question
   text: {type: String, required: true},
+  // URL of the picture of the item
+  picture: {type: String},
   // Scored? Questions can be non-scored for simple polls
   scored: {type: Boolean, default: true},
   // Shove it to the top of the list in admin view?
@@ -122,6 +124,7 @@ export class Quiz {
         id: this._activeQuestion._id,
         title: this._activeQuestion.title,
         text: this._activeQuestion.text,
+        picture: this._activeQuestion.picture,
         scored: this._activeQuestion.scored,
         // Don't want to send which answers are correct all the time,
         // see `correctAnswers` below

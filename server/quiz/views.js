@@ -58,6 +58,7 @@ export function updateQuestionJson(req, res) {
   const update = {
     title: req.body.title,
     text: req.body.text,
+    picture: req.body.picture,
     scored: !!req.body.scored,
     priority: !!req.body.priority,
     answers: req.body.answers
