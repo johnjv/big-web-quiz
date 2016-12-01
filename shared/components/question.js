@@ -124,9 +124,13 @@ export default class Question extends BoundComponent {
           method="POST"
           ref={el => this.form = el}>
           <div class="question__container">
-            <h1 class="question__title">{title}</h1>
-            <p class="question__text">{text}</p>
-            <img src={picture} />
+            <div class="question__top-container">
+              <img class="question__picture" src={picture} />
+              <div class="question__text-container">
+                <h1 class="question__title">{title}</h1>
+                <p class="question__text">{text}</p>
+              </div>
+            </div>
             <div class="question__answer-container">
               {answers.map((answer, i) =>
                 <div class={
