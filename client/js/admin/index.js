@@ -68,6 +68,12 @@ class App extends BoundComponent {
     editingQuestions.push(question._id);
     this.setState({editingQuestions});
   }
+  onCancel() {
+    this.setState({
+      addingQuestion: false,
+      editingQuestions: []
+    });
+  }
   async setQuestionState(question, state) {
     try {
       const response = await fetch(`/admin/question-${state}.json`, {
@@ -287,10 +293,9 @@ class App extends BoundComponent {
         view === 'questions' ?
 
         <section class="admin__questions">
-
           {
             addingQuestion ?
-            <QuestionUpdate onQuestionSaved={this.onQuestionSaved}/>
+            <QuestionUpdate onQuestionSaved={this.onQuestionSaved} onCancel={this.onCancel}/>
             :
             <div class="admin__questions-add">
               {showingBlackout ?
@@ -326,6 +331,7 @@ class App extends BoundComponent {
                       answers={question.answers}
                       onQuestionSaved={this.onQuestionSaved}
                       onQuestionRemoved={this.onQuestionRemoved}
+                      onCancel={this.onCancel}
                     />
                   </li>
                 );

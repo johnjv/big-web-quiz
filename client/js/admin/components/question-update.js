@@ -99,6 +99,9 @@ export default class QuestionUpdate extends BoundComponent {
     answers.forEach(answer => answer.correct = false);
     answers[i].correct = event.target.checked;
   }
+  onCancelAdd() {
+    this.props.onCancel();
+  }
   render({id}, {answers}) {
     return <form class="admin__question-edit-form" action={UPDATE_ACTION} method="POST" onSubmit={this.onSubmit}>
       {id ? <input type="hidden" name="id" value={id}/> : ''}
@@ -149,6 +152,7 @@ export default class QuestionUpdate extends BoundComponent {
       <div class="admin__update-question">
         <button>{id ? 'Update question' : 'Save question'}</button>
         {id ? <button type="button" onClick={this.onRemoveQuestion}>Remove question</button> : null}
+        <button type="button" onClick={this.onCancelAdd}>Cancel</button>
       </div>
     </form>
   }
@@ -156,5 +160,6 @@ export default class QuestionUpdate extends BoundComponent {
 
 QuestionUpdate.defaultProps = {
   onQuestionSaved: function(){},
-  onQuestionRemoved: function(){}
+  onQuestionRemoved: function(){},
+  onCancel: function(){}
 };
