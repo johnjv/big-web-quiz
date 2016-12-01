@@ -20,7 +20,8 @@ const ObjectId = mongoose.Schema.Types.ObjectId;
 export const ADMIN_IDS = [
   '116237864387312784020', // Jake
   '102813120987797040209', // Paul Lewis
-  '104714371990859295637'  // thebigwebquiz
+  '104714371990859295637',  // thebigwebquiz
+  '103849041941527282282' // Tyler
 ];
 
 const userSchema = mongoose.Schema({
@@ -58,18 +59,9 @@ userSchema.statics.updateScores = function(questions) {
         if (!userAnswer) continue;
         const choices = userAnswer.choices;
 
-        if (question.multiple) {
-          for (const [i, answer] of question.answers.entries()) {
-            if (answer.correct === choices.includes(i)) {
-              score += 2;
-            }
-          }
-        }
-        else {
-          const correctIndex = question.answers.findIndex(a => a.correct);
-          if (choices[0] == correctIndex) {
-            score += 10;
-          }
+        const correctIndex = question.answers.findIndex(a => a.correct);
+        if (choices[0] == correctIndex) {
+          score += 10;
         }
       }
 

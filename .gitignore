@@ -3,3 +3,4 @@ node_modules
 server/settings.js
 client/audio
 client/video
+npm-debug.log

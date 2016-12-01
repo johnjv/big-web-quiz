@@ -18,15 +18,9 @@ import mongoose from '../mongoose-db';
 
 const questionSchema = mongoose.Schema({
   // Short title of the question, eg "Question 1"
-  title: {type: String, required: true, default: "Question!"},
+  title: {type: String, required: true, default: "How much is it?!"},
   // The actual question
   text: {type: String, required: true},
-  // Answers can optionally have a code example
-  code: String,
-  // So syntax highlighting can do the right thing
-  codeType: String,
-  // User can select multiple answers (checkboxes rather than radios)
-  multiple: Boolean,
   // Scored? Questions can be non-scored for simple polls
   scored: {type: Boolean, default: true},
   // Shove it to the top of the list in admin view?
@@ -128,9 +122,6 @@ export class Quiz {
         id: this._activeQuestion._id,
         title: this._activeQuestion.title,
         text: this._activeQuestion.text,
-        code: this._activeQuestion.code,
-        codeType: this._activeQuestion.codeType,
-        multiple: this._activeQuestion.multiple,
         scored: this._activeQuestion.scored,
         // Don't want to send which answers are correct all the time,
         // see `correctAnswers` below

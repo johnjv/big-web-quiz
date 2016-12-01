@@ -108,10 +108,7 @@ export default class App extends BoundComponent {
                 id={question.id}
                 title={question.title}
                 text={question.text}
-                multiple={question.multiple}
                 answers={question.answers}
-                code={question.code}
-                codeType={question.codeType}
                 closed={questionClosed}
                 correctAnswers={correctAnswers}
                 answersSubmitted={answersSubmitted}

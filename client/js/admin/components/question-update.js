@@ -31,15 +31,12 @@ export default class QuestionUpdate extends BoundComponent {
       id = '',
       title = '',
       text = '',
-      code = '',
-      codeType = '',
       answers = [createAnswerObject(), createAnswerObject()],
-      multiple = false,
       scored = true,
       priority = false
     } = props;
 
-    this.state = {title, text, code, codeType, answers, multiple, scored, priority};
+    this.state = {title, text, answers, scored, priority};
   }
   async onRemoveQuestion(event) {
     event.preventDefault();
@@ -67,7 +64,7 @@ export default class QuestionUpdate extends BoundComponent {
   }
   async onSubmit(event) {
     event.preventDefault();
-    const {title, text, code, codeType, answers, multiple, scored, priority} = this.state;
+    const {title, text, answers, scored, priority} = this.state;
     const id = this.props.id;
 
     try {
@@ -76,8 +73,8 @@ export default class QuestionUpdate extends BoundComponent {
         credentials: 'include',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-          title, text, code, codeType,
-          answers, multiple, scored, id, priority
+          title, text,
+          answers, scored, id, priority
         })
       });
 
@@ -99,12 +96,10 @@ export default class QuestionUpdate extends BoundComponent {
   onAnswerChange(event, i) {
     const answers = this.state.answers;
 
-    if (!this.state.multiple) {
-      answers.forEach(answer => answer.correct = false);
-    }
+    answers.forEach(answer => answer.correct = false);
     answers[i].correct = event.target.checked;
   }
-  render({id}, {answers, multiple}) {
+  render({id}, {answers}) {
     return <form class="admin__question-edit-form" action={UPDATE_ACTION} method="POST" onSubmit={this.onSubmit}>
       {id ? <input type="hidden" name="id" value={id}/> : ''}
       <table class="admin__question-table">
@@ -114,26 +109,6 @@ export default class QuestionUpdate extends BoundComponent {
 
         <tr>
           <th>Question:</th><td><input type="text" value={this.state.text} onChange={this.linkState('text')}/></td>
-        </tr>
-
-        <tr>
-          <th>Code:</th><td><textarea value={this.state.code} onChange={this.linkState('code')}/></td>
-        </tr>
-
-        <tr>
-          <th>Code type:</th>
-          <td>
-            <select value={this.state.codeType} onChange={this.linkState('codeType')}>
-              <option value="">None</option>
-              <option value="javascript">JavaScript</option>
-              <option value="markup">Markup</option>
-              <option value="css">CSS</option>
-            </select>
-          </td>
-        </tr>
-
-        <tr>
-          <th>Multiple answers:</th><td><input type="checkbox" checked={this.state.multiple} onChange={this.linkState('multiple')}/></td>
         </tr>
 
         <tr>
@@ -156,7 +131,7 @@ export default class QuestionUpdate extends BoundComponent {
 
               <label class="admin__question-correct-answer">
                 <input
-                  type={multiple ? 'checkbox' : 'radio'}
+                  type="radio"
                   name="correct-answer"
                   checked={answer.correct}
                   onChange={event => this.onAnswerChange(event, i)}

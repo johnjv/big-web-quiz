@@ -321,9 +321,6 @@ class App extends BoundComponent {
                       id={question._id}
                       title={question.title}
                       text={question.text}
-                      code={question.code}
-                      codeType={question.codeType}
-                      multiple={question.multiple}
                       scored={question.scored}
                       priority={question.priority}
                       answers={question.answers}
@@ -344,19 +341,6 @@ class App extends BoundComponent {
                     <tr>
                       <td>Text:</td>
                       <td>{question.text}</td>
-                    </tr>
-                    {question.code &&
-                      <tr>
-                        <td>Code:</td>
-                        <td>
-                          {question.codeType}:
-                          <pre>{question.code}</pre>
-                        </td>
-                      </tr>
-                    }
-                    <tr>
-                      <td>Multiple:</td>
-                      <td>{String(question.multiple)}</td>
                     </tr>
                     <tr>
                       <td>Scored:</td>

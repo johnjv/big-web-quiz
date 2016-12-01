@@ -163,7 +163,8 @@ export function updateUser(req, res) {
 }
 
 const adminIds = [
-  '116237864387312784020' // Jake
+  '116237864387312784020', // Jake
+  '103849041941527282282' // Tyler
 ];
 
 export function requiresAdminHtml(req, res, next) {
@@ -267,7 +268,7 @@ export async function questionAnswerJson(req, res) {
       })
     )];
 
-    if (!quiz.activeQuestion.multiple && choices.length != 1) {
+    if (choices.length != 1) {
       res.json({err: "Must provide one answer"});
       return;
     }

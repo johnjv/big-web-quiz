@@ -17,7 +17,6 @@
 import {h} from 'preact';
 
 import BoundComponent from './bound-component';
-import Code from './code';
 import QuestionSpinner from './question-spinner';
 import QuestionClosed from './question-closed'
 
@@ -96,8 +95,7 @@ export default class Question extends BoundComponent {
       ).map(el => el.checked)
     })
   }
-  render({id, title, text, multiple, answers, closed, showLiveResults, correctAnswers, code, codeType, presentation}, {answersChecked, answersSubmitted, spinnerState, submittedAnswersThisSession}) {
-    const codeEl = code && <Code code={code} codeType={codeType}></Code>;
+  render({id, title, text, answers, closed, showLiveResults, correctAnswers, presentation}, {answersChecked, answersSubmitted, spinnerState, submittedAnswersThisSession}) {
 
     const answersToCheck = closed ? answersSubmitted : answersChecked;
 
@@ -115,7 +113,7 @@ export default class Question extends BoundComponent {
               'question__selection-instructions'
           }>
             {
-              multiple ? 'Select all that apply' : 'Select one'
+              'Select one'
             }
           </div>
         }
@@ -128,7 +126,6 @@ export default class Question extends BoundComponent {
           <div class="question__container">
             <h1 class="question__title">{title}</h1>
             <p class="question__text">{text}</p>
-            {codeEl}
             <div class="question__answer-container">
               {answers.map((answer, i) =>
                 <div class={
@@ -138,7 +135,7 @@ export default class Question extends BoundComponent {
                 } key={`question-${id}-answer-${i}`}>
                   <input
                     id={`question-${id}-answer-${i}`}
-                    type={multiple ? 'checkbox' : 'radio'}
+                    type="radio"
                     name="answer"
                     value={i}
                     checked={answersToCheck[i]}
@@ -165,7 +162,7 @@ export default class Question extends BoundComponent {
                         'question__submitted-answer question__submitted-answer--success' :
                         'question__submitted-answer'
                     }>Answer submitted</div>
-                    <button disabled={closed || spinnerState || (answersChecked.length === 0 && !multiple)} class={
+                    <button disabled={closed || spinnerState || (answersChecked.length === 0)} class={
                       spinnerState ?
                         'question__submit question__submit--pending' :
                         'question__submit'

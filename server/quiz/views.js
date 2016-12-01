@@ -58,9 +58,6 @@ export function updateQuestionJson(req, res) {
   const update = {
     title: req.body.title,
     text: req.body.text,
-    code: req.body.code,
-    codeType: req.body.codeType,
-    multiple: !!req.body.multiple,
     scored: !!req.body.scored,
     priority: !!req.body.priority,
     answers: req.body.answers
